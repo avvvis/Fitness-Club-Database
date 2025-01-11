@@ -1,2 +1,2 @@
-# Baza-Danych-Klubu-Fitness
-Projekt na przedmiot Bazy Danych
+# Fitness Club database
+Fitness club database
