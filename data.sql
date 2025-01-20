@@ -1,3 +1,4 @@
+---6/24
 CREATE TABLE Locations 
 (
   LocationID INT PRIMARY KEY,
@@ -30,4 +31,19 @@ CREATE TABLE Employees
   DateOfBirth DATA,
   DateOfEmployment DATA,
   Salary INT
+)
+CREATE TABLE Customers 
+(
+  CustomerID INT PRIMARY KEY,
+  CustomerName NVARCHAR(30),
+  CustomerSurname NVARCHAR(30),
+  DateOfBirth DATA,
+  BegininOfMembership DATA
+)
+CREATE TABLE Promotion 
+(
+  PromotionID INT PRIMARY KEY,
+  PromotionName NVARCHAR(30),
+  TypeOfPromotion NVARCHAR(1),
+  PromotionValue INT 
 )
