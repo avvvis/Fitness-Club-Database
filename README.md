@@ -1,6 +1,6 @@
 # Fitness Club database
 Fitness club database
-#Spis Tabel
+# Spis Tabel
 1.	Invoices 
 2.	Payments 
 3.	Members
@@ -25,6 +25,5 @@ Fitness club database
 22.	MerchOrders 
 23.	Discounts 
 24.	Attendence
-25.	Equipment
 
 ![image](https://github.com/user-attachments/assets/147b5c05-9451-4c06-a89f-4421089fb790)
