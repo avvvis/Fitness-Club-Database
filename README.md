@@ -1,5 +1,5 @@
 # Fitness Club database - description
-Fitness club database
+TBA
 ## List of tables
 1.	Invoices 
 2.	Payments 
@@ -26,4 +26,15 @@ Fitness club database
 23.	Discounts 
 24.	Attendence
 
+## Diagram ERD
+
 ![image](https://github.com/user-attachments/assets/147b5c05-9451-4c06-a89f-4421089fb790)
+
+## Diagram ER
+
+TBA
+
+## Creating Tables 
+
+https://github.com/avvvis/Fitness-Club-Database/blob/main/data.sql
+
