@@ -1,4 +1,4 @@
---1 Widok--wyswietl srednia ocene kazdego trenera
+--1. View--average rating of each trainer
 CREATE VIEW AverageTrainerRating AS
     SELECT 
     t.TrainerID,
@@ -8,7 +8,7 @@ CREATE VIEW AverageTrainerRating AS
     LEFT JOIN TrainerReviews tr ON t.TrainerID = tr.TrainerID
     GROUP BY t.TrainerID, t.TrainerName
     ORDER BY AverageRating DESC;
---2 Widok--ile transakcji skorzystało z danego kodu promocyjnego
+--2. View--how many transactions used a given promotional code
 CREATE VIEW PromoCodeTransactions AS
     SELECT 
     p.DiscountCode,
