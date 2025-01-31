@@ -1,6 +1,6 @@
-# Fitness Club database
+## Fitness Club database - description
 Fitness club database
-# Spis Tabel
+# List of tables
 1.	Invoices 
 2.	Payments 
 3.	Members
