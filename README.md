@@ -35,4 +35,5 @@ TBA
 TBA
 
 *Made by Mateusz Jędrkowiak, Karolina Kulas & Aleksander Wiśniewski*
+
 *Jagiellonian University, 2025*
