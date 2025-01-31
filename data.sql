@@ -34,6 +34,14 @@ CREATE TABLE Memberships (
     DurationMonths INT
 );
 
+CREATE TABLE CompanyMembership (
+    CompanyMembershipID INT PRIMARY KEY,
+    CompanyName NVARCHAR(256),
+    MembershipID INT,
+    StartDate DATE,
+    EndDate DATE
+);
+
 CREATE TABLE MembershipSuspensions (
     SuspensionID INT PRIMARY KEY,
     MemberID INT,
