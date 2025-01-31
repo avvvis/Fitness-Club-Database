@@ -34,7 +34,5 @@ TBA
 
 TBA
 
-## Creating Tables 
-
-![code](https://github.com/avvvis/Fitness-Club-Database/blob/main/data.sql)
-
+*Made by Mateusz Jędrkowiak, Karolina Kulas & Aleksander Wiśniewski*
+*Jagiellonian University, 2025*
