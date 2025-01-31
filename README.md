@@ -36,5 +36,5 @@ TBA
 
 ## Creating Tables 
 
-https://github.com/avvvis/Fitness-Club-Database/blob/main/data.sql
+![code](https://github.com/avvvis/Fitness-Club-Database/blob/main/data.sql)
 
