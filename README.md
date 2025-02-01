@@ -27,7 +27,7 @@ TBA
 24.	DiscountCodes
 25.	Attendence
 
-## ERD Diagram
+## Diagram ERD 
 
 <img width="1728" alt="ERD Diagram" src="https://github.com/user-attachments/assets/e10155f7-5b67-4ce3-bd73-d9427f7600db" />
 
