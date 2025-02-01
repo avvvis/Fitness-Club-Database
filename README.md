@@ -23,7 +23,7 @@ TBA
 20.	Employees
 21.	Merch 
 22.	MerchOrders 
-23.	DiscontCodes
+23.	DiscountCodes
 24.	Attendence
 
 ## Diagram ERD
