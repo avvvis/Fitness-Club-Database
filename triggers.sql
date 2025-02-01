@@ -7,23 +7,13 @@ AS
 BEGIN
     SET NOCOUNT ON;
     
-    DECLARE @MemberID INT, @training_count INT;
-    
-    SELECT @MemberID = inserted.MemberID
-    FROM inserted;
-    
-    SELECT @training_count = COUNT(*)
-    FROM PersonalTrainings
-    WHERE MemberID = @MemberID;
-    
-    IF @training_count >= 10
-    BEGIN
-        IF NOT EXISTS (SELECT 1 FROM Leaderboard WHERE MemberID = @MemberID)
-        BEGIN
-            INSERT INTO Leaderboard (MemberID, TotalTrainings, TotalHours, Rank)
-            VALUES (@MemberID, @training_count, @training_count * 1.5, NULL);
-        END;
-    END;
+    INSERT INTO Leaderboard (MemberID, TotalTrainings, TotalHours, Rank)
+    SELECT i.MemberID, COUNT(p.TrainingID), COUNT(p.TrainingID) * 1.5, NULL
+    FROM inserted i
+    JOIN PersonalTrainings p ON i.MemberID = p.MemberID
+    GROUP BY i.MemberID
+    HAVING COUNT(p.TrainingID) >= 10
+    AND NOT EXISTS (SELECT 1 FROM Leaderboard l WHERE l.MemberID = i.MemberID);
 END;
 
 -- 2. Trigger -- Update Invoice Status to 'Paid' After Full Payment
@@ -35,25 +25,15 @@ AS
 BEGIN
     SET NOCOUNT ON;
     
-    DECLARE @InvoiceID INT, @total_payments MONEY, @total_amount MONEY;
-    
-    SELECT @InvoiceID = inserted.InvoiceID
-    FROM inserted;
-    
-    SELECT @total_payments = COALESCE(SUM(AmountPaid), 0)
-    FROM Payments
-    WHERE InvoiceID = @InvoiceID;
-    
-    SELECT @total_amount = TotalAmount
-    FROM Invoices
-    WHERE InvoiceID = @InvoiceID;
-    
-    IF @total_payments >= @total_amount
-    BEGIN
-        UPDATE Invoices
-        SET Status = 'Paid'
-        WHERE InvoiceID = @InvoiceID;
-    END;
+    UPDATE Invoices
+    SET Status = 'Paid'
+    FROM Invoices i
+    WHERE EXISTS (
+        SELECT 1 FROM Payments p
+        WHERE p.InvoiceID = i.InvoiceID
+        GROUP BY p.InvoiceID
+        HAVING SUM(p.AmountPaid) >= i.TotalAmount
+    );
 END;
 
 -- 3. Trigger -- Apply Discount Automatically Based on Promo Code
@@ -65,25 +45,14 @@ AS
 BEGIN
     SET NOCOUNT ON;
     
-    DECLARE @DiscountCode VARCHAR(50), @discount_percentage INT, @AmountPaid MONEY;
-    
-    SELECT @DiscountCode = inserted.DiscountCode, @AmountPaid = inserted.AmountPaid
-    FROM inserted;
-    
-    IF @DiscountCode IS NOT NULL
-    BEGIN
-        SELECT @discount_percentage = DiscountPercentage
-        FROM PromotionCodes
-        WHERE DiscountCode = @DiscountCode AND Status = 'Active';
-        
-        IF @discount_percentage IS NOT NULL
-        BEGIN
-            SET @AmountPaid = @AmountPaid * (1 - (@discount_percentage / 100.0));
-        END;
-    END;
-    
-    INSERT INTO Payments (InvoiceID, AmountPaid, DiscountCode)
-    SELECT InvoiceID, @AmountPaid, @DiscountCode FROM inserted;
+    INSERT INTO Payments (InvoiceID, AmountPaid, DiscountCodeID, MemberID, PaymentDate)
+    SELECT i.InvoiceID, 
+           i.AmountPaid * (1 - COALESCE(pc.DiscountPercentage, 0) / 100.0), 
+           i.DiscountCodeID, 
+           i.MemberID, 
+           i.PaymentDate
+    FROM inserted i
+    LEFT JOIN DiscountCodes pc ON i.DiscountCodeID = pc.CodeID AND pc.Status = 'Active';
 END;
 
 -- 4. Trigger -- Auto-Deactivate Expired Memberships
@@ -97,10 +66,12 @@ BEGIN
     
     UPDATE Members
     SET MembershipID = NULL
-    FROM Members m
-    INNER JOIN inserted i ON m.MemberID = i.MemberID
-    INNER JOIN Memberships ms ON ms.MembershipID = i.MembershipID
-    WHERE ms.EndDate <= GETDATE();
+    WHERE MemberID IN (
+        SELECT i.MemberID
+        FROM inserted i
+        JOIN Memberships m ON i.MembershipID = m.MembershipID
+        WHERE m.EndDate <= GETDATE()
+    );
 END;
 
 -- 5. Trigger -- Auto-Remove from Leaderboard When Membership Expires
@@ -114,7 +85,8 @@ BEGIN
     
     DELETE FROM Leaderboard
     WHERE MemberID IN (
-        SELECT MemberID FROM inserted
-        WHERE EndDate <= GETDATE()
+        SELECT i.MemberID
+        FROM inserted i
+        WHERE i.EndDate <= GETDATE()
     );
 END;
