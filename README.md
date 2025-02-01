@@ -1,6 +1,6 @@
 # Fitness Club database - description
 <img src="logo.png" width="100" />
-
+<img src="LOGO.png" width="100" />
 ## List of tables
 1.	Invoices 
 2.	Payments 
