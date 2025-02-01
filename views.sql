@@ -1,4 +1,5 @@
 -- 1. View -- Average rating of each trainer
+
 CREATE VIEW AverageTrainerRating AS
     SELECT 
         t.TrainerID,
@@ -9,6 +10,7 @@ CREATE VIEW AverageTrainerRating AS
     GROUP BY t.TrainerID, t.TrainerName;
 
 -- 2. View -- How many transactions used a given promotional code
+
 CREATE VIEW PromoCodeTransactions AS
     SELECT 
         dc.DiscountCode,
