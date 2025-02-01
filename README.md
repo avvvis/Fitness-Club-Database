@@ -1,5 +1,7 @@
 # Fitness Club database - description
 TBA
+<img width="40" alt="LOGO" src="(https://github.com/avvvis/Fitness-Club-Database/blob/main/logo.png)" />
+
 ## List of tables
 1.	Invoices 
 2.	Payments 
