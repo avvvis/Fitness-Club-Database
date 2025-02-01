@@ -1,7 +1,7 @@
 # Fitness Club database - description
 <img src="logo.png" width="100" />
 <img src="LOGO.png" width="100" />
-*MAK stands for Mati, Alek, Karo & fitness, but it’s also a shoutout to the best bus stop in Krakow, 'Czerwone Maki P+R', where we wanna locate this amazing fitness club
+*MAKi fitness stands for Mati, Alek, Karo & fitness, but it’s also a shoutout to the best bus stop in Krakow, 'Czerwone Maki P+R', where we wanna locate this amazing fitness club
 
 ## List of tables
 1.	Invoices 
