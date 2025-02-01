@@ -1,6 +1,6 @@
 # Fitness Club database - description
 TBA
-<img width="40" alt="LOGO" src="(main/logo.png)" />
+![Logo](logo.png)
 
 ## List of tables
 1.	Invoices 
