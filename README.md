@@ -30,15 +30,10 @@
 24.	DiscountCodes
 25.	Attendence
 
-## Diagram ERD 
+## ERD 
 
 <img width="1728" alt="ERD Diagram" src="https://github.com/user-attachments/assets/e10155f7-5b67-4ce3-bd73-d9427f7600db" />
 
-
-
-## Diagram ER
-
-TBA
 
 *Made by Mateusz Jędrkowiak, Karolina Kulas & Aleksander Wiśniewski*
 
