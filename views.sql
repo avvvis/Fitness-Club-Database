@@ -1,13 +1,14 @@
 -- 1. View -- Average rating of each trainer
 
 CREATE VIEW AverageTrainerRating AS
-    SELECT 
-        t.TrainerID,
-        t.TrainerName,
-        COALESCE(AVG(tr.Rating * 1.0), 0) AS AverageRating  
-    FROM Trainers t
-    LEFT JOIN TrainerReviews tr ON t.TrainerID = tr.TrainerID
-    GROUP BY t.TrainerID, t.TrainerName;
+SELECT 
+    t.TrainerID,
+    t.TrainerName,
+    COALESCE(AVG(r.Rating * 1.0), 0) AS AverageRating ---coalesce returns average rating or when null then 0
+FROM Trainers t
+LEFT JOIN TrainerReviews tr ON t.TrainerID = tr.TrainerID
+LEFT JOIN Reviews r ON tr.ReviewID = r.ReviewID
+GROUP BY t.TrainerID, t.TrainerName
 
 -- 2. View -- How many transactions used a given promotional code
 
@@ -18,3 +19,71 @@ CREATE VIEW PromoCodeTransactions AS
     FROM Payments p
     JOIN DiscountCodes dc ON p.DiscountCodeID = dc.CodeID  
     GROUP BY dc.DiscountCode;
+
+-- 3. View -- Member Attendance 
+CREATE VIEW vwMemberAttendance AS
+SELECT 
+    a.AttendanceID,
+    a.MemberID,
+    m.MembershipType,
+    a.ClassID,
+    c.ClassName,
+    a.AttendanceDate,
+    a.Status
+FROM Attendance a
+JOIN Members m ON a.MemberID = m.MemberID
+JOIN Classes c ON a.ClassID = c.ClassID;
+
+-- 4. View -- Classes with most and least enrollments 
+
+CREATE VIEW EnrollmentExtremes AS
+
+--CTE for coutning the number of enrollments for each class
+WITH EnrollmentCounts AS (
+    SELECT
+        c.ClassID,
+        c.ClassName,
+        COUNT(e.EnrollmentID) AS EnrollmentCount
+    FROM Classes c
+    LEFT JOIN ClassEnrollments e
+        ON c.ClassID = e.ClassID
+    GROUP BY c.ClassID, c.ClassName
+),
+--CTE for maximum and minimumm enrollments
+MinMax AS (
+    SELECT
+        MAX(EnrollmentCount) AS MaxEnrollment,
+        MIN(EnrollmentCount) AS MinEnrollment
+    FROM EnrollmentCounts
+)
+--select for viewing only the classes with min or max enrollments
+SELECT
+    ec.ClassID,
+    ec.ClassName,
+    ec.EnrollmentCount,
+    CASE
+        WHEN ec.EnrollmentCount = mm.MaxEnrollment THEN 'MAX'
+        WHEN ec.EnrollmentCount = mm.MinEnrollment THEN 'MIN'
+    END AS EnrollmentType
+FROM EnrollmentCounts ec
+CROSS JOIN MinMax mm
+WHERE ec.EnrollmentCount = mm.MaxEnrollment
+   OR ec.EnrollmentCount = mm.MinEnrollment;
+
+
+-- 5. View -- Class average rating
+CREATE VIEW vwAverageClassRating AS
+SELECT
+    c.ClassID,
+    c.ClassName,
+    c.ClassLevel,
+    AVG(r.Rating) AS AverageRating
+FROM Classes AS c
+INNER JOIN ClassesReviews AS cr
+    ON c.ClassID = cr.ClassID
+INNER JOIN Reviews AS r
+    ON cr.ReviewID = r.ReviewID
+GROUP BY
+    c.ClassID,
+    c.ClassName,
+    c.ClassLevel;

@@ -55,38 +55,40 @@ BEGIN
     LEFT JOIN DiscountCodes pc ON i.DiscountCodeID = pc.CodeID AND pc.Status = 'Active';
 END;
 
--- 4. Trigger -- Auto-Deactivate Expired Memberships
+-- 4. Trigger -- Auto-Deactivate Expired Memberships (sets MembershipID in Members on NULL)
 
 CREATE TRIGGER Trigger_DeactivateExpiredMembership
-ON Memberships
+ON membershipactions
 AFTER UPDATE
 AS
 BEGIN
     SET NOCOUNT ON;
     
-    UPDATE Members
-    SET MembershipID = NULL
-    WHERE MemberID IN (
-        SELECT i.MemberID
-        FROM inserted i
-        JOIN Memberships m ON i.MembershipID = m.MembershipID
-        WHERE m.EndDate <= GETDATE()
-    );
-END;
-
--- 5. Trigger -- Auto-Remove from Leaderboard When Membership Expires
-
-CREATE TRIGGER Trigger_RemoveFromLeaderboard
-ON Memberships
-AFTER UPDATE
-AS
-BEGIN
-    SET NOCOUNT ON;
-    
-    DELETE FROM Leaderboard
-    WHERE MemberID IN (
+    UPDATE m
+    SET m.MembershipID = NULL
+    FROM Members m
+    WHERE m.MemberID IN (
         SELECT i.MemberID
         FROM inserted i
         WHERE i.EndDate <= GETDATE()
+          AND i.ActionType ='Cancelation'
+    );
+END;
+
+-- 5. Trigger -- Auto-Remove from Leaderboard When Membership Expires (deletes member from leaderboard)
+CREATE TRIGGER Trigger_RemoveFromLeaderboard
+ON membershipactions
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    DELETE l
+    FROM Leaderboard l
+    WHERE l.MemberID IN (
+        SELECT i.MemberID
+        FROM inserted i
+        WHERE i.EndDate <= GETDATE()
+          AND i.ActionType = 'Cancelation'
     );
 END;

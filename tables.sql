@@ -21,7 +21,7 @@ CREATE TABLE Employees (
     Phone NVARCHAR(20) UNIQUE,
     Email NVARCHAR(100) UNIQUE,
     FitnessClubID INT,
-    Position NVARCHAR(100)
+    Position NVARCHAR(100),
     FOREIGN KEY (FitnessClubID) REFERENCES FitnessClubs(FitnessClubID)
 );
 
@@ -51,7 +51,7 @@ CREATE TABLE IndividualMemberships (
     MemberName NVARCHAR(100),
     Email NVARCHAR(100),
     Phone NVARCHAR(20),
-    MembershipID INT
+    MembershipID INT,
     FOREIGN KEY (MemberID) REFERENCES Members(MemberID) ON DELETE CASCADE
 );
 --subclass for company membersips (inherits from Members)
@@ -135,9 +135,10 @@ CREATE TABLE Classes (
     ClassLevel INT NOT NULL CHECK (ClassLevel BETWEEN 1 AND 5)
 );
 
-CREATE TABLE ClassTypes (
+CREATE TABLE ClassTrainers (
     ClassID INT,
-    TrainerID INT
+    TrainerID INT,
+    CONSTRAINT PK_ClassTypes PRIMARY KEY (ClassID, TrainerID),
     FOREIGN KEY (ClassID) REFERENCES Classes(ClassID),
     FOREIGN KEY (TrainerID) REFERENCES Trainers(TrainerID)
 );
