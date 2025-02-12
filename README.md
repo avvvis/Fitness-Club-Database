@@ -17,7 +17,7 @@
 11.	TrainerReviews 
 12.	ClassesReviews
 13.	Classes 
-14.	ClassTypes 
+14.	ClassTrainers 
 15.	ClassEnrollments 
 16.	ClassSchedules 
 17.	WaitLists
