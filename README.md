@@ -32,7 +32,7 @@
 
 ## ERD 
 
-<img width="1728" alt="ERD Diagram" src="https://github.com/user-attachments/assets/e10155f7-5b67-4ce3-bd73-d9427f7600db" />
+![image](https://github.com/user-attachments/assets/885aaab1-af87-4dba-9a46-94d74b0ad233)
 
 
 *Made by Mateusz Jędrkowiak, Karolina Kulas & Aleksander Wiśniewski*
