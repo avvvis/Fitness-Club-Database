@@ -86,7 +86,21 @@ To ensure the stable operation of the system and minimize the risk of data loss,
 
 5. **vwAverageClassRating** – **Average Class Rating**  
    - This view calculates the average rating for each type of class. It joins the `Classes`, `ClassesReviews`, and `Reviews` tables to compute the average class rating, including the difficulty level of each course.
+     
+6. **vwTop3InEachGroup** - **Top 3 Members in Each Group**
+   - This view shows top 3 members in leaderboard for each class group. It selects only members with rank higher or equal to 3 and then groups the result by class groups. 
 
+7. **vwCountMembershipType** - **Number of Each Membership Type**
+  - This view counts the number of each membership type registered.
+
+8. **vwActiveMembersEnrolled** - **Number of Active Members Enrolled in Each Scheduled Class**
+   - This view shows how many active members have enrolled for the scheduled classes. It joins `ClassSchedules` and  `ClassEnrollments` tabels to count the number of members enrolled in each class. Additionally, the result is sorted to show only Active members.
+
+9. **vwTotalIncomePerMonth** - **Total Income Each Month**
+  - This view shows how much the club has earned from memberships each month. It goups payments by payment month to calculate the sum each month.
+
+10. **vwLocationsSortedByNeededMaintanance** - **Locations In Order Of How Much Equipment Needes Maintanance**
+  - This view shows clubs location and how much equipment needs maintanace at each location. Additionaly, the result is soreted to show locations that need maintanance the most first.
 ## Triggers  
 [code](https://github.com/avvvis/Fitness-Club-Database/blob/main/triggers.sql)
 
