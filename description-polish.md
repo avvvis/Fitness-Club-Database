@@ -3,10 +3,15 @@
 *Uniwersytet Jagiellonski, 2025*
 # Baza danych klubu fitness - "MAK fintess" 
 <img src="LOGO.png" width="100" />
+
 ## Opis oraz zalozenia
+
 ## Możliwości 
+
 ## Ograniczenia
+
 ## Schemat pielęgnacji bazy danych
+
 ## Lista tabeli
 1.	Invoices 
 2.	Payments 
@@ -34,9 +39,10 @@
 24.	DiscountCodes
 25.	Attendence
 ## Widoki
+
 ## Wyzwalacze
-## 
-## ERD 
+
+## Diagramy relacji
 
 ![image](https://github.com/user-attachments/assets/885aaab1-af87-4dba-9a46-94d74b0ad233)
 
