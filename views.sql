@@ -1,6 +1,6 @@
 -- 1. View -- Average rating of each trainer
 
-CREATE VIEW AverageTrainerRating AS
+CREATE VIEW vwAverageTrainerRating AS
 SELECT 
     t.TrainerID,
     t.TrainerName,
@@ -12,7 +12,7 @@ GROUP BY t.TrainerID, t.TrainerName
 
 -- 2. View -- How many transactions used a given promotional code
 
-CREATE VIEW PromoCodeTransactions AS
+CREATE VIEW vwPromoCodeTransactions AS
     SELECT 
         dc.DiscountCode,
         COUNT(p.PaymentID) AS NumberOfTransactions
@@ -36,7 +36,7 @@ JOIN Classes c ON a.ClassID = c.ClassID;
 
 -- 4. View -- Classes with most and least enrollments 
 
-CREATE VIEW EnrollmentExtremes AS
+CREATE VIEW vwEnrollmentExtremes AS
 
 --CTE for coutning the number of enrollments for each class
 WITH EnrollmentCounts AS (
