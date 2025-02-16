@@ -87,3 +87,37 @@ GROUP BY
     c.ClassID,
     c.ClassName,
     c.ClassLevel;
+
+-- 6. View -- Top 3 members from each group
+CREATE VIEW Top3InEachGroup AS
+SELECT * FROM Leaderboard AS lb
+WHERE lb.Rank <= 3
+ORder BY lb.ClassID, lb.Rank
+
+-- 7.View -- Count how many members have individual or company memberships
+CREATE VIEW CountMembershipType AS
+SELECT COUNT(*), membershiptype FROM Members
+GROUP BY membershiptype
+
+-- 8.View -- See how many active members are enrolled in each scheduled class
+CREATE VIEW ActiveMembersEnrolled AS
+select DISTINCT(classname), COUNT(*) AS ActiveMembersEnrolled from Classes C
+JOIN ClassSchedules S ON S.ClassID = C.ClassID
+JOIN ClassEnrollments E ON  S.ClassID = E.ClassID
+WHERE status = 'Active'
+GROUP BY scheduleid
+
+-- 9.View -- Total income each month
+SELECT MONTH(P.PaymentDate) AS [Month],SUM(AmountPaid) AS TotalIncome FROM Payments P
+GROUP BY MONTH(P.PaymentDate)
+
+-- 10.View -- Locations that need the most maintanance work
+SELECT COUNT(*) as NeededMaintenance, e.FitnessClubID, fc.Address AS ClubID FROM Equipment e
+JOIN FitnessClubs fc ON fc.FitnessClubID = e.FitnessClubID
+WHERE e.Status IN ('Maintenance Required', 'Out of Service')
+GROUP BY e.FitnessClubID, fc.Address
+ORDER BY COUNT(*) DESC
+
+
+
+
