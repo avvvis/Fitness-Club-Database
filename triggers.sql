@@ -1,6 +1,6 @@
 -- 1. Trigger -- Auto-Add Member to Leaderboard After 10 Trainings
 
-CREATE TRIGGER Trigger_AddToLeaderboard
+CREATE TRIGGER trAddToLeaderboard
 ON PersonalTrainings
 AFTER INSERT
 AS
@@ -18,7 +18,7 @@ END;
 
 -- 2. Trigger -- Update Invoice Status to 'Paid' After Full Payment
 
-CREATE TRIGGER Trigger_UpdateInvoiceStatus
+CREATE TRIGGER trUpdateInvoiceStatus
 ON Payments
 AFTER INSERT, UPDATE
 AS
@@ -38,7 +38,7 @@ END;
 
 -- 3. Trigger -- Apply Discount Automatically Based on Promo Code
 
-CREATE TRIGGER Trigger_ApplyDiscount
+CREATE TRIGGER trApplyDiscount
 ON Payments
 INSTEAD OF INSERT
 AS
@@ -57,7 +57,7 @@ END;
 
 -- 4. Trigger -- Auto-Deactivate Expired Memberships (sets MembershipID in Members on NULL)
 
-CREATE TRIGGER Trigger_DeactivateExpiredMembership
+CREATE TRIGGER trDeactivateExpiredMembership
 ON membershipactions
 AFTER UPDATE
 AS
@@ -76,7 +76,7 @@ BEGIN
 END;
 
 -- 5. Trigger -- Auto-Remove from Leaderboard When Membership Expires (deletes member from leaderboard)
-CREATE TRIGGER Trigger_RemoveFromLeaderboard
+CREATE TRIGGER trRemoveFromLeaderboard
 ON membershipactions
 AFTER UPDATE
 AS
