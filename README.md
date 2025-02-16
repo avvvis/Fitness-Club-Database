@@ -100,7 +100,8 @@ To ensure the stable operation of the system and minimize the risk of data loss,
    - This view shows how much the club has earned from memberships each month. It goups payments by payment month to calculate the sum each month.
 
 10. **vwLocationsSortedByNeededMaintanance** - **Locations In Order Of How Much Equipment Needes Maintanance**  
-   - This view shows clubs location and how much equipment needs maintanace at each location. Additionaly, the result is soreted to show locations that need maintanance the most first.
+    - This view shows clubs location and how much equipment needs maintanace at each location. Additionaly, the result is soreted to show locations that need maintanance the most first.
+     
 ## Triggers  
 [code](https://github.com/avvvis/Fitness-Club-Database/blob/main/triggers.sql)
 
