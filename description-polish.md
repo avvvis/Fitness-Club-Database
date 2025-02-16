@@ -42,6 +42,7 @@ Aby zapewnić stabilne działanie systemu i zminimalizować ryzyko utraty danych
 - **Testy odtwarzania danych** – regularne przeprowadzanie próbnego przywracania systemu z backupów, aby upewnić się, że proces działa sprawnie i pozwala na szybkie odzyskanie danych w razie awarii.
 
 ## Lista tabel
+[kod](https://github.com/avvvis/Fitness-Club-Database/blob/main/tables.sql)
 1. **Invoices** – Przechowuje dane o fakturach, takie jak numer faktury, data wystawienia, kwota, status płatności i powiązany członek lub firma.  
 2. **Payments** – Zawiera informacje o dokonanych płatnościach, w tym metodę płatności, kwotę, datę oraz powiązaną fakturę.  
 3. **Members** – Przechowuje dane o członkach klubu, takie jak imię, nazwisko, e-mail, numer telefonu, adres i status członkostwa.  
