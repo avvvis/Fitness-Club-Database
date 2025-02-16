@@ -69,13 +69,63 @@ Aby zapewnić stabilne działanie systemu i zminimalizować ryzyko utraty danych
 25. **Attendance** – Rejestruje obecność członków w klubie, w tym datę, godzinę wejścia i wyjścia oraz powiązane członkostwo.  
 
 ## Widoki
+[kod](https://github.com/avvvis/Fitness-Club-Database/blob/main/views.sql)
+
+1. **vwAverageTrainerRating** - **Średnia ocena trenera**
+   - Ten widok oblicza średnią ocenę dla każdego trenera na podstawie ocen w recenzjach. W przypadku braku recenzji dla trenera, zwróci wartość 0 (dzięki funkcji `COALESCE`). Widok zawiera identyfikator trenera, jego nazwisko oraz średnią ocenę.
+
+2. **vwPromoCodeTransactions** - **Transakcje z użyciem kodu promocyjnego**
+   - Widok ten pokazuje, ile transakcji skorzystało z danego kodu rabatowego. Zlicza liczbę transakcji, które wykorzystały określony kod rabatowy, łącząc tabele płatności z kodami rabatowymi.
+
+3. **vwMemberAttendance** - **Obecności członków**
+   - Widok zawiera dane o obecnościach członków na zajęciach, łącząc tabele `Attendance`, `Members` i `Classes`. Zawiera identyfikator obecności, identyfikator członka, typ członkostwa, identyfikator zajęć, nazwę zajęć, datę obecności oraz status obecności (np. obecny, nieobecny).
+
+4. **vwEnrollmentExtremes** - **Zajęcia z największą i najmniejszą liczbą zapisów**
+   - Widok ten identyfikuje zajęcia z największą oraz najmniejszą liczbą zapisanych uczestników. Wykorzystuje CTE (Common Table Expressions) do zliczenia liczby zapisów na każde zajęcia oraz do znalezienia maksymalnej i minimalnej liczby zapisów. Na końcu filtruje wyniki, aby pokazać tylko te zajęcia, które mają największą lub najmniejszą liczbę zapisanych uczestników.
+
+5. **vwAverageClassRating** - **Średnia ocena zajęć**
+   - Widok oblicza średnią ocenę dla każdego typu zajęć. Łączy tabele `Classes`, `ClassesReviews` i `Reviews`, aby obliczyć średnią ocenę dla każdego kursu, w tym także uwzględnia poziom trudności kursu.
 
 ## Wyzwalacze
+[kod](https://github.com/avvvis/Fitness-Club-Database/blob/main/triggers.sql)
+
+1. **trAddToLeaderboard** - **Automatyczne dodanie członka do tabeli liderów po 10 treningach**
+   - Ten wyzwalacz automatycznie dodaje członka do tabeli liderów, gdy po zapisaniu treningu osobistego (w tabeli `PersonalTrainings`) członek osiągnie 10 zakończonych treningów. Sprawdza, czy członek już znajduje się w tabeli liderów, a jeśli nie, dodaje go z liczbą ukończonych treningów oraz obliczoną liczbą godzin (liczba treningów pomnożona przez 1.5).
+
+2. **trUpdateInvoiceStatus** - **Aktualizacja statusu faktury na 'Opłacona' po pełnej płatności**
+   - Wyzwalacz ten aktualizuje status faktury na "Opłacona", gdy po wprowadzeniu lub zaktualizowaniu płatności (tabela `Payments`) suma zapłaconej kwoty osiągnie całkowitą kwotę faktury. Sprawdza, czy suma wszystkich płatności za daną fakturę jest większa lub równa pełnej kwocie faktury, a następnie zmienia jej status na "Opłacona".
+
+3. **trApplyDiscount** - **Automatyczne zastosowanie rabatu na podstawie kodu promocyjnego**
+   - Ten wyzwalacz modyfikuje płatność wstawioną do tabeli `Payments` (zamiast standardowego wstawiania), aby automatycznie zastosować rabat, jeśli został użyty aktywny kod promocyjny. Oblicza nową kwotę zapłaty, uwzględniając procent rabatu związanego z kodem promocyjnym. Zastosowanie rabatu zależy od tego, czy kod promocyjny jest aktywny.
+
+4. **trDeactivateExpiredMembership** - **Automatyczne dezaktywowanie wygasłych członkostw**
+   - Wyzwalacz ten dezaktywuje członkostwo, ustawiając `MembershipID` na NULL w tabeli `Members`, gdy członek zakończy swoje członkostwo (akcja typu "Cancelation") i data zakończenia członkostwa w tabeli `membershipactions` jest wcześniejsza lub równa bieżącej dacie. Oznacza to, że członkostwo wygasło, a członek już nie jest aktywnym użytkownikiem.
+
+5. **trRemoveFromLeaderboard** - **Automatyczne usunięcie z tabeli liderów, gdy członkostwo wygasa**
+   - Ten wyzwalacz usuwa członka z tabeli liderów, jeśli jego członkostwo wygasło (akcja typu "Cancelation" w tabeli `membershipactions`). Jeśli data zakończenia członkostwa jest wcześniejsza lub równa bieżącej dacie, członek zostaje usunięty z tabeli `Leaderboard`, co oznacza, że już nie jest częścią systemu rankingu.
+
+## Procedury składowania
+[kod](https://github.com/avvvis/Fitness-Club-Database/blob/main/procedures.sql)
+
+1. **UpdateEquipmentMaintenanceDate** - **Procedura aktualizacji daty konserwacji sprzętu**
+   - Procedura ta umożliwia aktualizację daty ostatniej konserwacji sprzętu na podstawie przekazanego identyfikatora sprzętu (`@EquipmentID`) oraz nowej daty konserwacji (`@NewMaintenanceDate`). Zaktualizowana zostanie tabela `Equipment`, gdzie wartość w kolumnie `LastMaintenance` zostanie ustawiona na nową datę konserwacji.
+
+2. **AddReview** - **Procedura dodawania recenzji**
+   - Procedura ta pozwala na dodanie recenzji, która może dotyczyć trenera lub zajęć (w zależności od wartości parametru `@ReviewType`). Wstawiane są dane do tabeli `Reviews`, a następnie, w zależności od rodzaju recenzji, dodawane są wpisy do tabel `TrainerReviews` (dla recenzji trenera) lub `ClassesReviews` (dla recenzji zajęć). Jeżeli podany typ recenzji jest błędny, procedura wypisuje komunikat o błędzie.
+
+3. **UpdateLeaderboard** - **Procedura aktualizacji tabeli liderów**
+   - Procedura ta aktualizuje tabelę liderów na podstawie obecności członka na zajęciach. Jeśli status obecności to "Present" (obecny), sprawdzane jest, czy dany członek i zajęcia znajdują się już w tabeli liderów. Jeśli tak, liczba treningów oraz godziny treningu są aktualizowane. Jeśli nie, członek i zajęcia są dodawane do tabeli liderów. Następnie rankingi w tabeli liderów są aktualizowane na podstawie sumy godzin treningów.
+
+4. **CancelOverDueMembers** - **Procedura anulowania członkostwa dla członków z niezapłaconymi fakturami**
+   - Procedura ta anuluje członkostwo członków, którzy mają zaległe płatności (faktury z datą wymagalności wcześniejszą niż dzisiejsza, o statusie "Unpaid" lub "Pending"). Dodatkowo, akcja anulowania członkostwa jest rejestrowana w tabeli `MembershipActions`, gdzie zapisane są szczegóły anulowania, takie jak data anulowania i powód.
+
+5. **usp_UpdateWaitlistForClass** - **Procedura aktualizacji listy oczekujących na zajęcia**
+   - Procedura ta sprawdza dostępne miejsca na zajęciach (w tabeli `ClassEnrollments`), porównując liczbę zapisanych osób z maksymalną pojemnością klasy. Jeśli są dostępne wolne miejsca, aktualizuje status osób z listy oczekujących (`Waitlists`), które mogą zostać przeniesione do listy potwierdzonych uczestników. Dodatkowo, numer kolejki na liście oczekujących jest aktualizowany, aby zachować odpowiednią kolejność.
 
 ## Diagramy relacji
 
 ![image](https://github.com/user-attachments/assets/885aaab1-af87-4dba-9a46-94d74b0ad233)
-
+![image](https://github.com/avvvis/Fitness-Club-Database/blob/main/ER%20diagram.png)
 
 *Mateusz Jędrkowiak, Karolina Kulas & Aleksander Wiśniewski*
 
