@@ -1,6 +1,6 @@
-**Mateusz Jędrkowiak, Karolina Kulas & Aleksander Wiśniewski**
+*Mateusz Jędrkowiak, Karolina Kulas & Aleksander Wiśniewski*
 
-**Jagiellonian University, 2025**  
+*Jagiellonian University, 2025* 
 # Fitness Club Database - "MAK Fitness"  
 
 <p align="center">
@@ -142,6 +142,6 @@ To ensure the stable operation of the system and minimize the risk of data loss,
 ![image](https://github.com/user-attachments/assets/885aaab1-af87-4dba-9a46-94d74b0ad233)  
 ![image](https://github.com/avvvis/Fitness-Club-Database/blob/main/ER%20diagram.png)
 
-**Mateusz Jędrkowiak, Karolina Kulas & Aleksander Wiśniewski**
+*Mateusz Jędrkowiak, Karolina Kulas & Aleksander Wiśniewski*
 
-**Jagiellonian University, 2025**
+*Jagiellonian University, 2025*
