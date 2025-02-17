@@ -87,6 +87,22 @@ Aby zapewnić stabilne działanie systemu i zminimalizować ryzyko utraty danych
 5. **vwAverageClassRating** - **Średnia ocena zajęć**
    - Widok oblicza średnią ocenę dla każdego typu zajęć. Łączy tabele `Classes`, `ClassesReviews` i `Reviews`, aby obliczyć średnią ocenę dla każdego kursu, w tym także uwzględnia poziom trudności kursu.
 
+6. **vwTop3InEachGroup - Top 3 członków w każdej grupie**  
+Ten widok pokazuje trzech najlepszych członków w tabeli wyników dla każdej grupy zajęciowej. Wybiera tylko członków z pozycją w rankingu równą lub wyższą niż 3, a następnie grupuje wynik według grup zajęciowych.  
+
+7. **vwCountMembershipType - Liczba każdego typu członkostwa**  
+Ten widok zlicza liczbę zarejestrowanych członkostw dla każdego typu członkostwa.  
+
+8. **vwActiveMembersEnrolled - Liczba aktywnych członków zapisanych na każde zaplanowane zajęcia**  
+Ten widok pokazuje, ilu aktywnych członków zapisało się na zaplanowane zajęcia. Łączy tabele `ClassSchedules` i `ClassEnrollments`, aby policzyć liczbę zapisanych członków dla każdego kursu. Dodatkowo wynik jest filtrowany, aby uwzględnić tylko aktywnych członków.  
+
+9. **vwTotalIncomePerMonth - Całkowity przychód w każdym miesiącu**  
+Ten widok pokazuje, ile klub zarobił na członkostwach w każdym miesiącu. Grupuje płatności według miesiąca i oblicza ich sumę dla każdego miesiąca.  
+
+10. **vwLocationsSortedByNeededMaintanance - Ilosc potrzebnych konserwacji w kazdej lokalizacji**  
+Ten widok pokazuje lokalizacje klubów oraz ilość sprzętu wymagającego konserwacji w każdej z nich.
+ 
+
 ## Wyzwalacze
 [kod](https://github.com/avvvis/Fitness-Club-Database/blob/main/triggers.sql)
 
