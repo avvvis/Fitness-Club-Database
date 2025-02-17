@@ -105,7 +105,7 @@ select DISTINCT(classname), COUNT(*) AS ActiveMembersEnrolled from Classes C
 JOIN ClassSchedules S ON S.ClassID = C.ClassID
 JOIN ClassEnrollments E ON  S.ClassID = E.ClassID
 WHERE status = 'Active'
-GROUP BY scheduleid, ClassID/
+GROUP BY scheduleid, ClassID
 
 -- 9.View -- Total income each month
 CREATE VIEW vwTotalIncomePerMonth AS
