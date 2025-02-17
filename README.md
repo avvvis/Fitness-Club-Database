@@ -33,13 +33,13 @@
 ## Database Maintenance Plan  
 To ensure the stable operation of the system and minimize the risk of data loss, effective maintenance procedures should be implemented:  
 
-- **Daily Backups** – Differential backups should be performed every night during the system's downtime to maintain up-to-date data.  
-- **Full Backups** – A full backup should be performed weekly during the night to ensure quick system restoration in case of failure.  
-- **Data Integrity Monitoring** – Regular checks for consistency and correctness of relationships between tables help prevent logical errors and invalid associations.  
-- **Performance Optimization** – Periodic refreshes of indexes and database statistics to speed up operations and improve query efficiency.  
-- **Data Retention Policy** – Clear rules for archiving and deleting outdated transaction data should be established to prevent uncontrolled database growth.  
-- **Additional Security Measures** – Implementation of encryption and access control mechanisms to protect sensitive information from unauthorized access.  
-- **Data Recovery Testing** – Regular practice of data restoration from backups to ensure the process is effective and allows for rapid data recovery in case of failure.
+  - **Daily Backups** – Differential backups should be performed every night during the system's downtime to maintain up-to-date data.  
+  - **Full Backups** – A full backup should be performed weekly during the night to ensure quick system restoration in case of failure.  
+  - **Data Integrity Monitoring** – Regular checks for consistency and correctness of relationships between tables help prevent logical errors and invalid associations.  
+  - **Performance Optimization** – Periodic refreshes of indexes and database statistics to speed up operations and improve query efficiency.  
+  - **Data Retention Policy** – Clear rules for archiving and deleting outdated transaction data should be established to prevent uncontrolled database growth.  
+  - **Additional Security Measures** – Implementation of encryption and access control mechanisms to protect sensitive information from unauthorized access.  
+  - **Data Recovery Testing** – Regular practice of data restoration from backups to ensure the process is effective and allows for rapid data recovery in case of failure.
 
 ## List of Tables  
 [code](https://github.com/avvvis/Fitness-Club-Database/blob/main/tables.sql)
