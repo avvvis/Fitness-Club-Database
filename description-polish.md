@@ -31,8 +31,6 @@
 
 
 ## Schemat pielęgnacji bazy danych
-Aby zapewnić stabilne działanie systemu i zminimalizować ryzyko utraty danych, warto wdrożyć skuteczne procedury utrzymaniowe 
-
 - **Codzienne kopie zapasowe** – każdej nocy, w czasie przestoju restauracji, należy wykonywać różnicowe backupy, aby zapewnić aktualność danych.  
 - **Pełne kopie zapasowe** – raz w tygodniu, w godzinach nocnych, zaleca się tworzenie pełnych kopii zapasowych, co umożliwi szybkie odtworzenie systemu w razie awarii.  
 - **Monitorowanie integralności danych** – regularna weryfikacja spójności i poprawności relacji między tabelami pozwoli uniknąć błędów logicznych i nieprawidłowych powiązań.  
