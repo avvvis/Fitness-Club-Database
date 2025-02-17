@@ -182,34 +182,20 @@ Aby zapewnić stabilne działanie systemu i zminimalizować ryzyko utraty danych
 1. **Ograniczenia CHECK**
 
 CHECK ogranicza wartości w polach:
-   - Equipment -> Status:
-  CHECK (Status IN ('Operational', 'Maintenance Required', 'Out of Service'))
-   - Members -> MembershipType:
-  CHECK (MembershipType IN ('Individual', 'Company'))
-   - MembershipActions -> ActionType:
-  CHECK (ActionType IN ('Suspension', 'Cancelation'))
-   - Invoices -> Status:
-  CHECK (Status IN ('Paid', 'Unpaid', 'Pending'))
-   - DiscountCodes -> Status:
-  CHECK (Status IN ('Active', 'Inactive'))
-   - Classes -> ClassLevel:
-  CHECK (ClassLevel BETWEEN 1 AND 5)
-   - ClassEnrollments -> Status:
-  CHECK (Status IN ('Active', 'Completed', 'Dropped'))
-   - ClassSchedules -> Day:
-  CHECK (Day IN ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'))
-   - Waitlists -> Status:
-  CHECK (Status IN ('Waiting', 'Confirmed', 'Cancelled'))
-   - Attendance -> Status:
-  CHECK (Status IN ('Present', 'Absent', 'Excused'))
-   - Reviews -> Rating:
-  CHECK (Rating BETWEEN 1 AND 5)
-   - ClassesReviews -> DifficultyLevel:
-  CHECK (DifficultyLevel BETWEEN 1 AND 5)
-   - Merch -> ItemPrice:
-  CHECK (ItemPrice >= 0)
-   - MerchOrders -> Size:
-  CHECK (Size IN ('S', 'M', 'L', 'XL'))
+   - Equipment -> Status: CHECK (Status IN ('Operational', 'Maintenance Required', 'Out of Service'))
+   - Members -> MembershipType: CHECK (MembershipType IN ('Individual', 'Company'))
+   - MembershipActions -> ActionType: CHECK (ActionType IN ('Suspension', 'Cancelation'))
+   - Invoices -> Status: CHECK (Status IN ('Paid', 'Unpaid', 'Pending'))
+   - DiscountCodes -> Status: CHECK (Status IN ('Active', 'Inactive'))
+   - Classes -> ClassLevel: CHECK (ClassLevel BETWEEN 1 AND 5)
+   - ClassEnrollments -> Status: CHECK (Status IN ('Active', 'Completed', 'Dropped'))
+   - ClassSchedules -> Day: CHECK (Day IN ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'))
+   - Waitlists -> Status: CHECK (Status IN ('Waiting', 'Confirmed', 'Cancelled'))
+   - Attendance -> Status: CHECK (Status IN ('Present', 'Absent', 'Excused'))
+   - Reviews -> Rating: CHECK (Rating BETWEEN 1 AND 5)
+   - ClassesReviews -> DifficultyLevel: CHECK (DifficultyLevel BETWEEN 1 AND 5)
+   - Merch -> ItemPrice: CHECK (ItemPrice >= 0)
+   - MerchOrders -> Size: CHECK (Size IN ('S', 'M', 'L', 'XL'))
 
 2. **Kaskadowe operacja usuwania**
  ON DELETE CASCADE zapewnia, że po usunięciu powiązanych danych usunięte zostaną również wpisy zależne (np. sprzęt po usunięciu klubu, recenzje po usunięciu członka).
@@ -224,7 +210,7 @@ CHECK ogranicza wartości w polach:
    - DELETE SET NULL sprawia, że jeśli kod rabatowy zostanie usunięty, to w Payments jego wartość zmieni się na NULL.
 3. **Unikalne rekordy**
    - UNIQUE zapewnia unikalność w Phone, Email, Rank i (ClassID, Rank).
-4. **Ograniczenie NOT NULL
+4. **Ograniczenie NOT NULL**
 NOT NULL wymusza obecność wartości w wielu kluczowych polach
    - FitnessClubs -> Address
    - Equipment -> Status
