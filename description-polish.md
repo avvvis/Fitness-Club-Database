@@ -139,6 +139,39 @@ Aby zapewnić stabilne działanie systemu i zminimalizować ryzyko utraty danych
 5. **usp_UpdateWaitlistForClass** - **Procedura aktualizacji listy oczekujących na zajęcia**
    - Procedura ta sprawdza dostępne miejsca na zajęciach (w tabeli `ClassEnrollments`), porównując liczbę zapisanych osób z maksymalną pojemnością klasy. Jeśli są dostępne wolne miejsca, aktualizuje status osób z listy oczekujących (`Waitlists`), które mogą zostać przeniesione do listy potwierdzonych uczestników. Dodatkowo, numer kolejki na liście oczekujących jest aktualizowany, aby zachować odpowiednią kolejność.
 
+## Indeksy
+[kod](https://github.com/avvvis/Fitness-Club-Database/blob/main/Indexes.sql)
+
+1. **IX_Invoices_Member_Status**
+  - Ten indeks przyspiesza zapytania filtrujące faktury według identyfikatora członka (`@MemberID`) i statusu, co jest szczególnie przydatne przy wyszukiwaniu faktur o określonym statusie płatności. Dzięki łączeniu tych kolumn, baza danych szybciej odnajduje właściwe rekordy.
+
+2. **IX_Trainers_Specialization**
+  - Indeks ten zwiększa wydajność wyszukiwania trenerów według ich specjalizacji. Umożliwia to szybkie odnalezienie trenera o konkretnej specjalizacji, co jest kluczowe przy przypisywaniu ich do odpowiednich treningów.
+
+3. **IX_ClassSchedules_ClubDayTime**
+   - Ten indeks kompozytowy na kolumnach (`@FitnessClubID`), (`@Day`) oraz (`@StartTime`) optymalizuje pobieranie harmonogramów zajęć. Grupowanie tych kolumn pozwala na szybkie filtrowanie i sortowanie danych według klubu, dnia tygodnia i godziny rozpoczęcia zajęć.
+
+4. **IX_Members_JoinDate**
+  - Indeks ten przyspiesza wyszukiwanie i sortowanie rekordów w tabeli `Members` na podstawie daty dołączenia (`@JoinDate`). Dzięki temu zapytania analizujące trendy rejestracji członków działają bardziej efektywnie.
+
+## Typowe zapytania
+[kod](https://github.com/avvvis/Fitness-Club-Database/blob/main/commonQueries.sql)
+
+1. **Zapytanie o nieopłacone faktury**
+  - To zapytanie zwraca szczegóły faktur (InvoiceID, MemberID, IssueDate, DueDate, TotalAmount), które mają status "Unpaid".
+    
+2. **Zapytanie o aktywne kody rabatowe**
+ - To zapytanie wyświetla identyfikatory, kody rabatowe i procentowe zniżki dla kodów o statusie "Active".
+   
+3. **Zapytanie o recenzje trenerów**
+ - To zapytanie łączy tabele Reviews, TrainerReviews i Trainers, aby wyświetlić recenzje wraz z nazwą trenera.
+   
+4. **Zapytanie o liczbę członków według typu członkostwa**
+ - To zapytanie grupuje członków według typu członkostwa i zlicza ich ilość, wyświetlając MembershipID, MembershipName oraz liczbę członków.
+   
+5. **Zapytanie o anulowane karnety w bieżącym miesiącu**
+ - To zapytanie zlicza liczbę anulowanych karnetów (ActionType = 'Cancelation') w bieżącym miesiącu, porównując datę anulacji z aktualną datą.
+
 ## Diagramy relacji
 
 ![image](https://github.com/user-attachments/assets/885aaab1-af87-4dba-9a46-94d74b0ad233)
