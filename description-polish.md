@@ -263,7 +263,7 @@ Aby zapewnić stabilne działanie systemu i zminimalizować ryzyko utraty danych
    - Usunięcie rejestracji na zajęcia → usuwa z listy oczekujących i z listy obecności.
    - Usunięcie recenzji → usuwa recenzje trenerów i zajęć.
    - Usunięcie produktu w sklepie → usuwa zamówienia na ten produkt.
-   - O DELETE SET NULL sprawia, że jeśli kod rabatowy zostanie usunięty, to w Payments jego wartość zmieni się na NULL.
+   - DELETE SET NULL sprawia, że jeśli kod rabatowy zostanie usunięty, to w Payments jego wartość zmieni się na NULL.
 4. **Unikalne rekordy**
    - UNIQUE zapewnia unikalność w Phone, Email, Rank i (ClassID, Rank).
 5. **Ograniczenie NOT NULL
