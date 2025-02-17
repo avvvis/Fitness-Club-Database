@@ -179,64 +179,81 @@ Aby zapewnić stabilne działanie systemu i zminimalizować ryzyko utraty danych
 
 ## Dodatkowe więzy integralności danych
 
-1. **Ograniczenia CHECK**
-CHECK ogranicza wartości w polach:
+# Dodatkowe więzy integralności danych
 
-   - Equipment -> Status
+1. **Ograniczenia CHECK**  
+   CHECK ogranicza wartości w polach:
 
-CHECK (Status IN ('Operational', 'Maintenance Required', 'Out of Service'))
+   ○ **Equipment -> Status**  
+     ```sql
+     CHECK (Status IN ('Operational', 'Maintenance Required', 'Out of Service'))
+     ```
 
-   - Members -> MembershipType
+   ○ **Members -> MembershipType**  
+     ```sql
+     CHECK (MembershipType IN ('Individual', 'Company'))
+     ```
 
-CHECK (MembershipType IN ('Individual', 'Company'))
+   ○ **MembershipActions -> ActionType**  
+     ```sql
+     CHECK (ActionType IN ('Suspension', 'Cancelation'))
+     ```
 
-   - MembershipActions -> ActionType
+   ○ **Invoices -> Status**  
+     ```sql
+     CHECK (Status IN ('Paid', 'Unpaid', 'Pending'))
+     ```
 
-CHECK (ActionType IN ('Suspension', 'Cancelation'))
+   ○ **DiscountCodes -> Status**  
+     ```sql
+     CHECK (Status IN ('Active', 'Inactive'))
+     ```
 
-   - Invoices -> Status
+   ○ **Classes -> ClassLevel**  
+     ```sql
+     CHECK (ClassLevel BETWEEN 1 AND 5)
+     ```
 
-CHECK (Status IN ('Paid', 'Unpaid', 'Pending'))
+   ○ **ClassEnrollments -> Status**  
+     ```sql
+     CHECK (Status IN ('Active', 'Completed', 'Dropped'))
+     ```
 
-   - DiscountCodes -> Status
+   ○ **ClassSchedules -> Day**  
+     ```sql
+     CHECK (Day IN ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'))
+     ```
 
-CHECK (Status IN ('Active', 'Inactive'))
+   ○ **Waitlists -> Status**  
+     ```sql
+     CHECK (Status IN ('Waiting', 'Confirmed', 'Cancelled'))
+     ```
 
-   - Classes -> ClassLevel
+   ○ **Attendance -> Status**  
+     ```sql
+     CHECK (Status IN ('Present', 'Absent', 'Excused'))
+     ```
 
-CHECK (ClassLevel BETWEEN 1 AND 5)
+   ○ **Reviews -> Rating**  
+     ```sql
+     CHECK (Rating BETWEEN 1 AND 5)
+     ```
 
-   - ClassEnrollments -> Status
+   ○ **ClassesReviews -> DifficultyLevel**  
+     ```sql
+     CHECK (DifficultyLevel BETWEEN 1 AND 5)
+     ```
 
-CHECK (Status IN ('Active', 'Completed', 'Dropped'))
+   ○ **Merch -> ItemPrice**  
+     ```sql
+     CHECK (ItemPrice >= 0)
+     ```
 
-   - ClassSchedules -> Day
+   ○ **MerchOrders -> Size**  
+     ```sql
+     CHECK (Size IN ('S', 'M', 'L', 'XL'))
+     ```
 
-CHECK (Day IN ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'))
-
-   - Waitlists -> Status
-
-CHECK (Status IN ('Waiting', 'Confirmed', 'Cancelled'))
-
-   - Attendance -> Status
-
-CHECK (Status IN ('Present', 'Absent', 'Excused'))
-
-   - Reviews -> Rating
-
-CHECK (Rating BETWEEN 1 AND 5)
-
-   - ClassesReviews -> DifficultyLevel
-
-CHECK (DifficultyLevel BETWEEN 1 AND 5)
-
-   - Merch -> ItemPrice
-
-CHECK (ItemPrice >= 0)
-
-   - MerchOrders -> Size
-
-CHECK (Size IN ('S', 'M', 'L', 'XL'))
 
 3. **Kaskadowe operacja usuwania**
  ON DELETE CASCADE zapewnia, że po usunięciu powiązanych danych usunięte zostaną również wpisy zależne (np. sprzęt po usunięciu klubu, recenzje po usunięciu członka).
