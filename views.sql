@@ -97,7 +97,7 @@ WHERE lb.Rank <= 3
 -- 7.View -- Count how many members have individual or company memberships
 CREATE VIEW vwCountMembershipType AS
 SELECT COUNT(*) as count, MembershipType FROM Members
-GROUP BY MembershipType --dziala
+GROUP BY MembershipType
 
 -- 8.View -- See how many active members are enrolled in each scheduled class
 CREATE VIEW vwActiveMembersEnrolled AS
@@ -110,7 +110,7 @@ GROUP BY scheduleid, classname
 -- 9.View -- Total income each month
 CREATE VIEW vwTotalIncomePerMonth AS
 SELECT MONTH(P.PaymentDate) AS [Month],SUM(AmountPaid) AS TotalIncome FROM Payments P
-GROUP BY MONTH(P.PaymentDate)--dziala
+GROUP BY MONTH(P.PaymentDate)
 
 -- 10.View -- Number of maintanance needed in each location
 CREATE VIEW vwLocationsSortedByNeededMaintanance AS

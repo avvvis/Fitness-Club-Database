@@ -283,11 +283,15 @@ VALUES
 --------------------------------------------
 -- 2. Member related INSERTS
 --------------------------------------------
+
 INSERT INTO Memberships (MembershipID, MembershipName, PricePerMonth, DurationMonths) VALUES
   (1, 'Basic',     29.99, 1),
   (2, 'Standard',  49.99, 3),
   (3, 'Premium',   69.99, 6),
   (4, 'Corporate', 99.99, 12);
+
+INSERT INTO Memberships (MembershipID, MembershipName, PricePerMonth, DurationMonths) VALUES
+  (5, 'Single-Entry', 10.99, 0);
 
 INSERT INTO Members (MemberID, MembershipType, MembershipID, JoinDate) VALUES
   (1,  'Individual', 1, '2023-01-10'),
