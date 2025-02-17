@@ -183,18 +183,31 @@ Aby zapewnić stabilne działanie systemu i zminimalizować ryzyko utraty danych
 
 CHECK ogranicza wartości w polach:
    - Equipment -> Status: CHECK (Status IN ('Operational', 'Maintenance Required', 'Out of Service'))
+
    - Members -> MembershipType: CHECK (MembershipType IN ('Individual', 'Company'))
+
    - MembershipActions -> ActionType: CHECK (ActionType IN ('Suspension', 'Cancelation'))
+
    - Invoices -> Status: CHECK (Status IN ('Paid', 'Unpaid', 'Pending'))
+
    - DiscountCodes -> Status: CHECK (Status IN ('Active', 'Inactive'))
+
    - Classes -> ClassLevel: CHECK (ClassLevel BETWEEN 1 AND 5)
+
    - ClassEnrollments -> Status: CHECK (Status IN ('Active', 'Completed', 'Dropped'))
+
    - ClassSchedules -> Day: CHECK (Day IN ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'))
+
    - Waitlists -> Status: CHECK (Status IN ('Waiting', 'Confirmed', 'Cancelled'))
+
    - Attendance -> Status: CHECK (Status IN ('Present', 'Absent', 'Excused'))
+
    - Reviews -> Rating: CHECK (Rating BETWEEN 1 AND 5)
+
    - ClassesReviews -> DifficultyLevel: CHECK (DifficultyLevel BETWEEN 1 AND 5)
+
    - Merch -> ItemPrice: CHECK (ItemPrice >= 0)
+
    - MerchOrders -> Size: CHECK (Size IN ('S', 'M', 'L', 'XL'))
 
 2. **Kaskadowe operacja usuwania**
