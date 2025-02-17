@@ -182,33 +182,33 @@ Aby zapewnić stabilne działanie systemu i zminimalizować ryzyko utraty danych
 1. **Ograniczenia CHECK**
 
 CHECK ogranicza wartości w polach:
-  - Equipment -> Status:
+   - Equipment -> Status:
   CHECK (Status IN ('Operational', 'Maintenance Required', 'Out of Service'))
-  - Members -> MembershipType:
+   - Members -> MembershipType:
   CHECK (MembershipType IN ('Individual', 'Company'))
-  - MembershipActions -> ActionType:
+   - MembershipActions -> ActionType:
   CHECK (ActionType IN ('Suspension', 'Cancelation'))
-  - Invoices -> Status:
+   - Invoices -> Status:
   CHECK (Status IN ('Paid', 'Unpaid', 'Pending'))
-  - DiscountCodes -> Status:
+   - DiscountCodes -> Status:
   CHECK (Status IN ('Active', 'Inactive'))
-  - Classes -> ClassLevel:
+   - Classes -> ClassLevel:
   CHECK (ClassLevel BETWEEN 1 AND 5)
-  - ClassEnrollments -> Status:
+   - ClassEnrollments -> Status:
   CHECK (Status IN ('Active', 'Completed', 'Dropped'))
-  - ClassSchedules -> Day:
+   - ClassSchedules -> Day:
   CHECK (Day IN ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'))
-  - Waitlists -> Status:
+   - Waitlists -> Status:
   CHECK (Status IN ('Waiting', 'Confirmed', 'Cancelled'))
-  - Attendance -> Status:
+   - Attendance -> Status:
   CHECK (Status IN ('Present', 'Absent', 'Excused'))
-  - Reviews -> Rating:
+   - Reviews -> Rating:
   CHECK (Rating BETWEEN 1 AND 5)
-  - ClassesReviews -> DifficultyLevel:
+   - ClassesReviews -> DifficultyLevel:
   CHECK (DifficultyLevel BETWEEN 1 AND 5)
-  - Merch -> ItemPrice:
+   - Merch -> ItemPrice:
   CHECK (ItemPrice >= 0)
-  - MerchOrders -> Size:
+   - MerchOrders -> Size:
   CHECK (Size IN ('S', 'M', 'L', 'XL'))
 
 2. **Kaskadowe operacja usuwania**
