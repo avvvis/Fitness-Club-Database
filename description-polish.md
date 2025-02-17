@@ -183,6 +183,7 @@ Aby zapewnić stabilne działanie systemu i zminimalizować ryzyko utraty danych
 CHECK ogranicza wartości w polach:
 
    - Equipment -> Status
+
 CHECK (Status IN ('Operational', 'Maintenance Required', 'Out of Service'))
 
    - Members -> MembershipType
@@ -236,7 +237,6 @@ CHECK (Size IN ('S', 'M', 'L', 'XL'))
    - O DELETE SET NULL sprawia, że jeśli kod rabatowy zostanie usunięty, to w Payments jego wartość zmieni się na NULL.
 4. **Unikalne rekordy**
    - UNIQUE zapewnia unikalność w Phone, Email, Rank i (ClassID, Rank).
-   - 
 5. **Ograniczenie NOT NULL
 NOT NULL wymusza obecność wartości w wielu kluczowych polach
    - FitnessClubs -> Address
