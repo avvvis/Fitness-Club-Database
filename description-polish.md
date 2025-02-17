@@ -31,13 +31,13 @@
 
 
 ## Schemat pielęgnacji bazy danych
-- **Codzienne kopie zapasowe** – każdej nocy, w czasie przestoju restauracji, należy wykonywać różnicowe backupy, aby zapewnić aktualność danych.  
-- **Pełne kopie zapasowe** – raz w tygodniu, w godzinach nocnych, zaleca się tworzenie pełnych kopii zapasowych, co umożliwi szybkie odtworzenie systemu w razie awarii.  
-- **Monitorowanie integralności danych** – regularna weryfikacja spójności i poprawności relacji między tabelami pozwoli uniknąć błędów logicznych i nieprawidłowych powiązań.  
-- **Optymalizacja wydajności** – okresowe odświeżanie indeksów i statystyk bazy danych w celu przyspieszenia operacji i zwiększenia efektywności zapytań.  
-- **Polityka retencji danych** – ustalenie jasnych zasad dotyczących archiwizacji i usuwania przestarzałych danych transakcyjnych, aby zapobiec niekontrolowanemu wzrostowi bazy danych.  
-- **Dodatkowe zabezpieczenia** – wdrożenie mechanizmów szyfrowania i kontroli dostępu, aby chronić wrażliwe informacje przed nieautoryzowanym dostępem.  
-- **Testy odtwarzania danych** – regularne przeprowadzanie próbnego przywracania systemu z backupów, aby upewnić się, że proces działa sprawnie i pozwala na szybkie odzyskanie danych w razie awarii.
+ - **Codzienne kopie zapasowe** – każdej nocy, w czasie przestoju restauracji, należy wykonywać różnicowe backupy, aby zapewnić aktualność danych.  
+ - **Pełne kopie zapasowe** – raz w tygodniu, w godzinach nocnych, zaleca się tworzenie pełnych kopii zapasowych, co umożliwi szybkie odtworzenie systemu w razie awarii.  
+ - **Monitorowanie integralności danych** – regularna weryfikacja spójności i poprawności relacji między tabelami pozwoli uniknąć błędów logicznych i nieprawidłowych powiązań.  
+ - **Optymalizacja wydajności** – okresowe odświeżanie indeksów i statystyk bazy danych w celu przyspieszenia operacji i zwiększenia efektywności zapytań.  
+ - **Polityka retencji danych** – ustalenie jasnych zasad dotyczących archiwizacji i usuwania przestarzałych danych transakcyjnych, aby zapobiec niekontrolowanemu wzrostowi bazy danych.  
+ - **Dodatkowe zabezpieczenia** – wdrożenie mechanizmów szyfrowania i kontroli dostępu, aby chronić wrażliwe informacje przed nieautoryzowanym dostępem.  
+ - **Testy odtwarzania danych** – regularne przeprowadzanie próbnego przywracania systemu z backupów, aby upewnić się, że proces działa sprawnie i pozwala na szybkie odzyskanie danych w razie awarii.
 
 ## Lista tabel
 [kod](https://github.com/avvvis/Fitness-Club-Database/blob/main/tables.sql)
