@@ -179,8 +179,6 @@ Aby zapewnić stabilne działanie systemu i zminimalizować ryzyko utraty danych
 
 ## Dodatkowe więzy integralności danych
 
-# Dodatkowe więzy integralności danych
-
 1. **Ograniczenia CHECK**  
    CHECK ogranicza wartości w polach:
 
