@@ -183,7 +183,6 @@ Aby zapewnić stabilne działanie systemu i zminimalizować ryzyko utraty danych
 CHECK ogranicza wartości w polach:
 
    - Equipment -> Status
-
 CHECK (Status IN ('Operational', 'Maintenance Required', 'Out of Service'))
 
    - Members -> MembershipType
@@ -224,6 +223,7 @@ CHECK (ItemPrice >= 0)
 
    - MerchOrders -> Size
 CHECK (Size IN ('S', 'M', 'L', 'XL'))
+
 3. **Kaskadowe operacja usuwania**
  ON DELETE CASCADE zapewnia, że po usunięciu powiązanych danych usunięte zostaną również wpisy zależne (np. sprzęt po usunięciu klubu, recenzje po usunięciu członka).
    - Usunięcie klubu → usuwa sprzęt
