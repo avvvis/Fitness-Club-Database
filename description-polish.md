@@ -180,8 +180,6 @@ Aby zapewnić stabilne działanie systemu i zminimalizować ryzyko utraty danych
 ## Dodatkowe więzy integralności danych
 
 1. **Ograniczenia CHECK**
-
-CHECK ogranicza wartości w polach:
    - Equipment -> Status: CHECK (Status IN ('Operational', 'Maintenance Required', 'Out of Service'))
 
    - Members -> MembershipType: CHECK (MembershipType IN ('Individual', 'Company'))
