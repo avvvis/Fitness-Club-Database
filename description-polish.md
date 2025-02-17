@@ -105,7 +105,7 @@ Aby zapewnić stabilne działanie systemu i zminimalizować ryzyko utraty danych
 5. **trRemoveFromLeaderboard** - **Automatyczne usunięcie z tabeli liderów, gdy członkostwo wygasa**
    - Ten wyzwalacz usuwa członka z tabeli liderów, jeśli jego członkostwo wygasło (akcja typu "Cancelation" w tabeli `membershipactions`). Jeśli data zakończenia członkostwa jest wcześniejsza lub równa bieżącej dacie, członek zostaje usunięty z tabeli `Leaderboard`, co oznacza, że już nie jest częścią systemu rankingu.
 
-## Procedury składowania
+## Procedury składowane
 [kod](https://github.com/avvvis/Fitness-Club-Database/blob/main/procedures.sql)
 
 1. **UpdateEquipmentMaintenanceDate** - **Procedura aktualizacji daty konserwacji sprzętu**
