@@ -92,12 +92,12 @@ GROUP BY
 CREATE VIEW vwTop3InEachGroup AS
 SELECT * FROM Leaderboard AS lb
 WHERE lb.Rank <= 3
-ORder BY lb.ClassID, lb.Rank
+ORder BY lb.ClassID, lb.Rank ---zmien tu
 
 -- 7.View -- Count how many members have individual or company memberships
 CREATE VIEW vwCountMembershipType AS
-SELECT COUNT(*), membershiptype FROM Members
-GROUP BY membershiptype
+SELECT COUNT(*) as count, MembershipType FROM Members
+GROUP BY MembershipType --dziala
 
 -- 8.View -- See how many active members are enrolled in each scheduled class
 CREATE VIEW vwActiveMembersEnrolled AS
@@ -105,12 +105,13 @@ select DISTINCT(classname), COUNT(*) AS ActiveMembersEnrolled from Classes C
 JOIN ClassSchedules S ON S.ClassID = C.ClassID
 JOIN ClassEnrollments E ON  S.ClassID = E.ClassID
 WHERE status = 'Active'
-GROUP BY scheduleid
+GROUP BY scheduleid/* tutaj taki error " Msg 8120, Level 16, State 1, Procedure vwActiveMembersEnrolled, Line 2
+Column 'Classes.ClassName' is invalid in the select list because it is not contained in either an aggregate function or the GROUP BY clause.*/
 
 -- 9.View -- Total income each month
 CREATE VIEW vwTotalIncomePerMonth AS
 SELECT MONTH(P.PaymentDate) AS [Month],SUM(AmountPaid) AS TotalIncome FROM Payments P
-GROUP BY MONTH(P.PaymentDate)
+GROUP BY MONTH(P.PaymentDate)--dziala
 
 -- 10.View -- Locations that need the most maintanance work
 CREATE VIEW vwLocationsSortedByNeededMaintanance AS
@@ -118,8 +119,5 @@ SELECT COUNT(*) as NeededMaintenance, e.FitnessClubID, fc.Address AS ClubID FROM
 JOIN FitnessClubs fc ON fc.FitnessClubID = e.FitnessClubID
 WHERE e.Status IN ('Maintenance Required', 'Out of Service')
 GROUP BY e.FitnessClubID, fc.Address
-ORDER BY COUNT(*) DESC
-
-
-
+ORDER BY COUNT(*) DESC --order by zmien tez
 
