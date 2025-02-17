@@ -177,6 +177,84 @@ Aby zapewnić stabilne działanie systemu i zminimalizować ryzyko utraty danych
 ![image](https://github.com/user-attachments/assets/885aaab1-af87-4dba-9a46-94d74b0ad233)
 ![image](https://github.com/avvvis/Fitness-Club-Database/blob/main/ER%20diagram.png)
 
+## Dodatkowe więzy integralności danych
+
+1. **Ograniczenia CHECK**
+CHECK ogranicza wartości w polach:
+
+   - Equipment -> Status
+CHECK (Status IN ('Operational', 'Maintenance Required', 'Out of Service'))
+
+   - Members -> MembershipType
+CHECK (MembershipType IN ('Individual', 'Company'))
+
+   - MembershipActions -> ActionType
+CHECK (ActionType IN ('Suspension', 'Cancelation'))
+
+   - Invoices -> Status
+CHECK (Status IN ('Paid', 'Unpaid', 'Pending'))
+
+   - DiscountCodes -> Status
+CHECK (Status IN ('Active', 'Inactive'))
+
+   - Classes -> ClassLevel
+CHECK (ClassLevel BETWEEN 1 AND 5)
+
+   - ClassEnrollments -> Status
+CHECK (Status IN ('Active', 'Completed', 'Dropped'))
+
+   - ClassSchedules -> Day
+CHECK (Day IN ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'))
+
+   - Waitlists -> Status
+CHECK (Status IN ('Waiting', 'Confirmed', 'Cancelled'))
+
+   - Attendance -> Status
+CHECK (Status IN ('Present', 'Absent', 'Excused'))
+
+   - Reviews -> Rating
+CHECK (Rating BETWEEN 1 AND 5)
+
+   - ClassesReviews -> DifficultyLevel
+CHECK (DifficultyLevel BETWEEN 1 AND 5)
+
+   - Merch -> ItemPrice
+CHECK (ItemPrice >= 0)
+
+   - MerchOrders -> Size
+CHECK (Size IN ('S', 'M', 'L', 'XL'))
+3. **Kaskadowe operacja usuwania**
+ ON DELETE CASCADE zapewnia, że po usunięciu powiązanych danych usunięte zostaną również wpisy zależne (np. sprzęt po usunięciu klubu, recenzje po usunięciu członka).
+   - Usunięcie klubu → usuwa sprzęt
+   - Usunięcie członka → usuwa wszystkie jego powiązane dane (np. aktywności, płatności, zapisy na zajęcia, recenzje).
+   - Usunięcie członkostwa → usuwa wszystkich członków, którzy je mieli.
+   - Usunięcie faktury → usuwa płatności powiązane z fakturą.
+   - Usunięcie zajęć → usuwa ich rejestracje, harmonogramy, oceny, listy oczekujących i obecności.
+   - Usunięcie rejestracji na zajęcia → usuwa z listy oczekujących i z listy obecności.
+   - Usunięcie recenzji → usuwa recenzje trenerów i zajęć.
+   - Usunięcie produktu w sklepie → usuwa zamówienia na ten produkt.
+   - O DELETE SET NULL sprawia, że jeśli kod rabatowy zostanie usunięty, to w Payments jego wartość zmieni się na NULL.
+4. **Unikalne rekordy**
+   - UNIQUE zapewnia unikalność w Phone, Email, Rank i (ClassID, Rank).
+   - 
+5. **Ograniczenie NOT NULL
+NOT NULL wymusza obecność wartości w wielu kluczowych polach
+   - FitnessClubs -> Address
+   - Equipment -> Status
+   - Invoices -> Status
+   - DiscountCodes -> Status
+   - Classes -> ClassLevel
+   - ClassEnrollments -> Status
+   - ClassSchedules -> Day
+   - Waitlists -> Status
+   - Attendance -> Status
+   - Leaderboard -> Rank
+   - Reviews -> Rating, ReviewDate
+   - TrainerReviews -> TrainerID
+   - ClassesReviews -> ClassID, DifficultyLevel
+   - Merch -> ItemName, ItemPrice
+   - MerchOrders -> Size
+
 *Mateusz Jędrkowiak, Karolina Kulas & Aleksander Wiśniewski*
 
 *Uniwersytet Jagiellonski, 2025*
